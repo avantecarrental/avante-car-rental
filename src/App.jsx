@@ -150,7 +150,7 @@ const getDiscountRate = (days) => {
   if (days >= 21) return 0.35;
   if (days >= 14) return 0.25;
   if (days >= 7) return 0.15;
-  if (days >= 3) return 0.05;
+  if (days >= 3) return 0.08; // Strictly 8% for Raya Season logic
   return 0;
 };
 
@@ -204,23 +204,11 @@ const getPromoStyles = (theme) => {
 // ==========================================
 
 const BOOKING_LOCATIONS_EN = [
-  "KLIA Terminal 1", "KLIA Terminal 2", "Subang Skypark (Sultan Abdul Aziz Shah)",
-  "KL Sentral", "Terminal Bersepadu Selatan (TBS)", "Terminal Bersepadu Gombak (TBG)",
-  "Kuala Lumpur City Centre (KLCC)", "Bukit Bintang", "Bangsar / Bangsar South",
-  "Mont Kiara / Sri Hartamas", "Cheras", "Setapak / Wangsa Maju", "Kepong",
-  "Petaling Jaya (PJ)", "Subang Jaya / USJ", "Shah Alam", "Klang", "Puchong",
-  "Damansara", "Sunway / Bandar Sunway", "Ampang Jaya", "Cyberjaya", "Putrajaya",
-  "Kajang / Bangi", "Rawang", "Selayang / Batu Caves", "Seri Kembangan", "Sungai Buloh"
+  "KLIA Terminal 1", "KLIA Terminal 2", "Subang Airport", "KL Sentral", "Bandar Sunway", "Bukit Bintang", "Petaling Jaya", "Shah Alam", "Puchong", "Sunway / Bandar Sunway"
 ];
 
 const BOOKING_LOCATIONS_BM = [
-  "KLIA Terminal 1", "KLIA Terminal 2", "Subang Skypark (Sultan Abdul Aziz Shah)",
-  "KL Sentral", "Terminal Bersepadu Selatan (TBS)", "Terminal Bersepadu Gombak (TBG)",
-  "Pusat Bandar Kuala Lumpur (KLCC)", "Bukit Bintang", "Bangsar / Bangsar South",
-  "Mont Kiara / Sri Hartamas", "Cheras", "Setapak / Wangsa Maju", "Kepong",
-  "Petaling Jaya (PJ)", "Subang Jaya / USJ", "Shah Alam", "Klang", "Puchong",
-  "Damansara", "Sunway / Bandar Sunway", "Ampang Jaya", "Cyberjaya", "Putrajaya",
-  "Kajang / Bangi", "Rawang", "Selayang / Batu Caves", "Seri Kembangan", "Sungai Buloh"
+  "KLIA Terminal 1", "KLIA Terminal 2", "Airport Subang", "KL Sentral", "Bandar Sunway", "Bukit Bintang", "Petaling Jaya", "Shah Alam", "Puchong", "Sunway / Bandar Sunway"
 ];
 
 const TRANSLATIONS = {
@@ -713,9 +701,9 @@ export default function App() {
 
   const [bookingData, setBookingData] = useState({
     location: '', 
-    startDate: '2026-02-01',
+    startDate: '2026-03-20',
     startTime: '10:00',
-    endDate: '2026-02-03',
+    endDate: '2026-03-23',
     endTime: '10:00',
     selectedAddOns: []
   });
@@ -1206,7 +1194,7 @@ export default function App() {
                             <span>Promo (-{Math.round(discountRate*100)}%)</span>
                             <span>-RM{pricingDetails.discount.toFixed(2)}</span>
                           </div>
-                          {/* Discounted Amount Display - Label removed as requested */}
+                          {/* Right-aligned discounted amount only */}
                           <div className="flex justify-end">
                             <span className="text-[13px] font-black text-emerald-900 leading-none bg-emerald-100/40 px-3 py-1.5 rounded-lg border border-emerald-100/50">
                                RM{(pricingDetails.base - pricingDetails.discount).toFixed(2)}
