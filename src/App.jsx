@@ -204,11 +204,23 @@ const getPromoStyles = (theme) => {
 // ==========================================
 
 const BOOKING_LOCATIONS_EN = [
-  "KLIA Terminal 1", "KLIA Terminal 2", "Subang Airport", "KL Sentral", "Bandar Sunway", "Bukit Bintang", "Petaling Jaya", "Shah Alam", "Puchong", "Sunway / Bandar Sunway"
+  "KLIA Terminal 1", "KLIA Terminal 2", "Subang Skypark (Sultan Abdul Aziz Shah)",
+  "KL Sentral", "Terminal Bersepadu Selatan (TBS)", "Terminal Bersepadu Gombak (TBG)",
+  "Kuala Lumpur City Centre (KLCC)", "Bukit Bintang", "Bangsar / Bangsar South",
+  "Mont Kiara / Sri Hartamas", "Cheras", "Setapak / Wangsa Maju", "Kepong",
+  "Petaling Jaya (PJ)", "Subang Jaya / USJ", "Shah Alam", "Klang", "Puchong",
+  "Damansara", "Sunway / Bandar Sunway", "Ampang Jaya", "Cyberjaya", "Putrajaya",
+  "Kajang / Bangi", "Rawang", "Selayang / Batu Caves", "Seri Kembangan", "Sungai Buloh"
 ];
 
 const BOOKING_LOCATIONS_BM = [
-  "KLIA Terminal 1", "KLIA Terminal 2", "Airport Subang", "KL Sentral", "Bandar Sunway", "Bukit Bintang", "Petaling Jaya", "Shah Alam", "Puchong", "Sunway / Bandar Sunway"
+  "KLIA Terminal 1", "KLIA Terminal 2", "Subang Skypark (Sultan Abdul Aziz Shah)",
+  "KL Sentral", "Terminal Bersepadu Selatan (TBS)", "Terminal Bersepadu Gombak (TBG)",
+  "Pusat Bandar Kuala Lumpur (KLCC)", "Bukit Bintang", "Bangsar / Bangsar South",
+  "Mont Kiara / Sri Hartamas", "Cheras", "Setapak / Wangsa Maju", "Kepong",
+  "Petaling Jaya (PJ)", "Subang Jaya / USJ", "Shah Alam", "Klang", "Puchong",
+  "Damansara", "Sunway / Bandar Sunway", "Ampang Jaya", "Cyberjaya", "Putrajaya",
+  "Kajang / Bangi", "Rawang", "Selayang / Batu Caves", "Seri Kembangan", "Sungai Buloh"
 ];
 
 const TRANSLATIONS = {
@@ -331,7 +343,7 @@ const TRANSLATIONS = {
     service2: "Inbound Travel",
     service3: "Airport Transfer",
     service4: "Wedding Services",
-    service5: "Corporate Packages",
+    service5: "Corporate Events",
     terms1Title: "Eligibility",
     terms1Text: "Hirer must be aged 21-65 with a valid domestic or international driving license. Probationary (P) license holders are not eligible.",
     terms2Title: "Insurance & CDW",
@@ -369,7 +381,8 @@ const TRANSLATIONS = {
     endsIn: "Ends in",
     min2Days: "Minimum 2 days rental.",
     back: "Back",
-    otherCars: "Other"
+    otherCars: "Other",
+    discountedAmt: "Discounted Rental"
   },
   BM: {
     welcome: "Hi! Selamat datang ke Avante Car Rental",
@@ -490,7 +503,7 @@ const TRANSLATIONS = {
     service2: "Pelancongan Masuk",
     service3: "Transfer Airport",
     service4: "Servis Perkahwinan",
-    service5: "Pakej Korporat",
+    service5: "Corporate Events",
     terms1Title: "Kelayakan",
     terms1Text: "Penyewa mestilah berumur 21-65 tahun dengan lesen memandu yang sah. Lesen P tak layak lagi tau.",
     terms2Title: "Insurans & CDW",
@@ -528,7 +541,8 @@ const TRANSLATIONS = {
     endsIn: "Tamat dalam",
     min2Days: "Minima sewa 2 hari.",
     back: "Kembali",
-    otherCars: "Koleksi"
+    otherCars: "Koleksi",
+    discountedAmt: "Sewa Selepas Diskaun"
   }
 };
 
@@ -1189,7 +1203,7 @@ export default function App() {
                       </div>
                       
                       {discountRate > 0 && (
-                        <div className="space-y-1.5">
+                        <div className="space-y-1">
                           <div className="flex justify-between text-xs font-bold text-green-600">
                             <span>Promo (-{Math.round(discountRate*100)}%)</span>
                             <span>-RM{pricingDetails.discount.toFixed(2)}</span>
@@ -1206,7 +1220,7 @@ export default function App() {
                       {pricingDetails.addOns > 0 && <div className="flex justify-between text-xs font-bold text-blue-600"><span>{lang === 'BM' ? 'Tambahan' : 'Add-ons'}</span><span>+RM{pricingDetails.addOns.toFixed(2)}</span></div>}
                       <div className="flex justify-between text-xs font-bold text-amber-600"><span>{T.secDepositLabel}</span><span>+RM{pricingDetails.deposit.toFixed(2)}</span></div>
                       
-                      <div className="flex justify-between pt-2 border-t border-gray-200 font-black text-gray-900"><span>{T.estTotal}</span><span className="text-blue-600">RM{pricingDetails.total.toFixed(2)}</span></div>
+                      <div className="flex justify-between pt-2 border-t border-gray-200 font-black text-gray-900 text-lg"><span>{T.estTotal}</span><span className="text-blue-600">RM{pricingDetails.total.toFixed(2)}</span></div>
                     </div>
                     <button onClick={handleWhatsAppBooking} className="w-full py-5 bg-blue-600 text-white font-black rounded-2xl shadow-xl hover:bg-blue-700 transition-all uppercase tracking-widest text-xs">{T.bookNow}</button>
                     <div className="flex items-center justify-center space-x-2 mt-2">
@@ -1845,14 +1859,14 @@ export default function App() {
               </div>
               <div className="pt-2 border-t border-gray-200/50">
                 <p className="text-[9px] font-bold text-gray-400 leading-tight">© 2026 Avante Car Rental Enterprise (4838348-X)</p>
-                <p className="text-[9px] font-bold text-gray-400 leading-tight mt-1">{lang === 'BM' ? 'Dikuasakan oleh' : 'Dikuasakan oleh'}: Avante Management Systems</p>
+                <p className="text-[9px] font-bold text-gray-400 leading-tight mt-1">Dikuasakan oleh: Avante Management Systems</p>
               </div>
             </div>
         </div>
       </aside>
       <main className="flex-1 flex flex-col overflow-hidden relative">
         <header className="h-24 bg-white border-b border-gray-100 flex items-center justify-between px-10 z-10 shrink-0">
-          <div className="flex items-center md:hidden">
+          <div className="flex items-center md:hidden" onClick={() => changeTab('dashboard')}>
             <img src={LOGO_URL} alt="Avante Logo" className="h-10 w-auto" />
           </div>
           <div className="hidden md:block"><p className="text-[11px] font-black text-gray-400 uppercase tracking-[0.2em]">{lang === 'BM' ? 'Hub Sewa Kereta Malaysia' : "Malaysia's Car Rental Hub"}</p></div>
